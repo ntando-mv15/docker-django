@@ -23,5 +23,5 @@ jobs:
       with:
         context: examples/python-web-app
         push: true
-        file: Dockerfile
+        file: examples/python-web-app/Dockerfile
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/python-webapp:latest
