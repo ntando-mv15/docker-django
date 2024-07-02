@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM python:3.9 alpine
 
 WORKDIR /app
 
@@ -6,18 +6,11 @@ COPY requirements.txt /app
 COPY devops /app
 
 RUN apt-get update && \
-    apt-get install -y software-properties-common && \
-    add-apt-repository universe && \
-    apt-get install -y python3 python3-pip python3-venv && \
-    python3 -m venv venv && \
-    venv/bin/pip install --upgrade pip && \
-    venv/bin/pip install -r requirements.txt
+    apt-get install -y python3 python3-pip && \
+    pip install -r requirements.txt && \
+    cd devops
 
-ENV PATH="/app/venv/bin:$PATH"
-
-WORKDIR /app/devops
-
-ENTRYPOINT ["/app/venv/bin/python"]
+ENTRYPOINT ENTRYPOINT ["python3"]
 
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]
 
